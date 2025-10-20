@@ -30,9 +30,11 @@ class TodoRepositoryImpl implements TodoRepository {
   }
 
   @override
-  Future<Todo> updateTodo(Todo todo) {
-    // TODO: implement updateTodo
-    throw UnimplementedError();
+  Future<void> updateTodo(Todo todo) async {
+    await (_database.update(_database.todoTable)..where(
+          (todoFromTable) => todoFromTable.id.equals(todo.id.toString()),
+        ))
+        .write(todo.toDrift());
   }
 
   @override

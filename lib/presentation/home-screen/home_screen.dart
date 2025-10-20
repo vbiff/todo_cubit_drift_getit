@@ -39,13 +39,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           : null;
                     },
                     child: ListTile(
-                      onTap: () {
-                        Navigator.push(
+                      onTap: () async {
+                        await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => TodoScreen(todoId: todo.id),
                           ),
                         );
+                        context.read<TodosCubit>().getAllTodos();
                       },
                       title: Text(todo.title),
                     ),
